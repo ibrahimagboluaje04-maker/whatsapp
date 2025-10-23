@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>WhatsApp  </title>
+<link rel="stylesheet" href="awsome/fontawesome-free-7.1.0-web/css/all.css">
+
+<style>
+  
+  
+  
+  html,body{
+    height:100%;
+    margin:0;
+    background-color:#0b0b0b;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+ 
+  .app {
+    height:100vh;
+    width:100vw;
+    display:flex;
+    align-items:stretch;
+    justify-content:flex-start;
+    box-sizing:border-box;
+    background-color: #0b0b0b;
+  }
+
+ 
+  .titlebar {
+    position:fixed;
+    left:0; right:0; top:0;
+    height:36px;
+    background:linear-gradient(180deg,#ffffff, #fafafa);
+    border-bottom:1px solid rgba(0,0,0,0.06);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:0 10px;
+    z-index:40;
+  }
+  .titlebar .logo {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-weight:600;
+    color:#3a3f45;
+    font-size:13px;
+  }
+  .titlebar .window-controls{
+    margin-left:auto;
+    display:flex;
+    gap:8px;
+    align-items:center;
+    color:#7c858b;
+    font-size:14px;
+  }
+
+  
+  .rail {
+    width:56px;
+    background:#f0f2f3;
+    border-right:1px solid rgba(0,0,0,0.06);
+    padding-top:52px; 
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+  }
+  .rail .rail-btn{
+    width:36px;
+    height:36px;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#58656c;
+    font-size:16px;
+  }
+  .rail .rail-btn.active{
+    background:white;
+    box-shadow:0 1px 0 rgba(0,0,0,0.03) inset;
+    color:#25d366;
+    border-radius:8px;
+  }
+  .rail .green-indicator{
+    width:22px;
+    height:22px;
+    border-radius:999px;
+    background:#25d366; 
+    color:white;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    box-shadow:0 1px 0 rgba(0,0,0,0.06);
+  }
+
+  
+  .chats-column{
+    width:360px;
+    background:#ffffff;
+    border-right:1px solid rgba(0,0,0,0.06);
+    padding-top:52px; 
+    display:flex;
+    flex-direction:column;
+    box-sizing:border-box;
+  }
+
+  .chats-header{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 14px;
+    border-bottom:1px solid rgba(0,0,0,0.06);
+  }
+  .chats-header h2{
+    font-size:16px;
+    font-weight:600;
+    color:#222;
+    margin:0;
+  }
+  .chats-header .icons{
+    margin-left:auto;
+    display:flex;
+    gap:8px;
+    color:#7c858b;
+    font-size:14px
+  }
+
+  .search-wrap{
+    padding:12px 14px;
+    border-bottom:1px solid rgba(0,0,0,0.06);
+    background:linear-gradient(180deg, #fff 0%, #fbfbfb 100%);
+  }
+  .search {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#f3f4f5;
+    padding:10px;border-radius:10px;
+    border:1px solid rgba(0,0,0,0.03);
+    color:#7c858b;
+  }
+  .search input{
+    border:0;
+    outline:0;
+    background:transparent;
+    width:100%;
+    font-size:14px;
+    color:#222;
+  }
+
+  
+  .chat-list{
+    overflow:auto;
+     padding:8px 6px 24px 6px;
+    }
+
+  .chat-item{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    padding:12px;
+    border-radius:10px;
+    margin:6px 8px;
+    transition:background .12s;
+  }
+  .chat-item:hover{
+    background:#fbfbfb;
+    cursor:pointer;
+  }
+  .avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    flex:0 0 48px;
+    background:linear-gradient(180deg,#ececec,#e0e0e0);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    color:#555;
+    font-size:18px;
+    border:1px solid rgba(0,0,0,0.03);
+  }
+
+  .chat-meta{
+    flex:1;
+    min-width:0;
+    display:flex;
+    justify-content:space-between;
+    gap:8px;    
+  }
+  .meta-left{
+    min-width:0;
+  }
+  .meta-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+  .name{
+    font-weight:600;
+    font-size:14px;
+    color:#202427;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .time{
+    font-size:12px;
+    color:#7c858b;
+    flex:0 0 auto;
+    white-space:nowrap;
+    }
+  .preview{
+    margin-top:8px;
+    font-size:13px;
+    color:#7c858b;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .badge{
+    background:#25d366;
+    color:#fff;
+    padding:6px 8px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:12px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:24px;
+    height:auto;
+  }
+
+ 
+  .viewer{
+    flex:1;
+    background: linear-gradient(180deg,#f9f9f9, #fcfcfc);
+    padding-top:52px; 
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+
+  .viewer-card{
+    width:52%;
+    max-width:720px;
+    text-align:center;
+    color:#8e9396;
+  }
+  .viewer-card .bubble{
+    width:72px;
+    height:72px;
+    border-radius:50%;
+    background:white;
+    border:1px solid rgba(0,0,0,0.04);
+    margin:0 auto 14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#bfc5c3;
+    font-size:30px;
+  }
+  .viewer-card h3{
+    margin:0 0 10px;
+    font-weight:700;
+    color:#2a2f30
+}
+  .viewer-card p{
+    margin:0;
+    font-size:13px;
+    line-height:1.5;
+    color:#8e9396
+}
+  .viewer-card a{
+    color:#1573c7;
+    text-decoration:underline
+}
+
+  .viewer .footer{
+    position:absolute;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+    color:#b8bec2;
+    font-size:12px;
+  }
+
+
+  .bottom-space{height:36px;
+  }
+
+ 
+  .chat-list::-webkit-scrollbar{width:10px}
+  .chat-list::-webkit-scrollbar-thumb{
+    background:rgba(0,0,0,0.06);
+    border-radius:10px;
+  }
+
+ 
+  @media (max-height:480px){
+    .chats-column,.viewer,.rail{padding-top:40px}
+    .titlebar{height:32px}
+  }
+
+ 
+  @media (max-width:900px){
+    .chats-column{width:300px}
+    .viewer-card{width:66%}
+  }
+</style>
+</head>
+<body>
+  <div class="app" role="application" aria-label="WhatsApp Desktop clone (light mode)">
+
+ 
+    <div class="titlebar" aria-hidden="true">
+      <div class="logo"><i class="fa-brands fa-whatsapp" style="color:#25d366"></i> WhatsApp</div>
+      <div class="window-controls">
+      
+       
+      </div>
+    </div>
+
+  
+    <nav class="rail" aria-label="app icons">
+      <div class="rail-btn active" title="Chats"><i class="fa-solid fa-comment"></i></div>
+      <div class="rail-btn" title="Status"><i class="fa-solid fa-circle-half-stroke"></i></div>
+      <div class="rail-btn" title="Calls"><i class="fa-solid fa-phone"></i></div>
+      <div class="rail-btn" title="Channels"><i class="fa-solid fa-bolt"></i></div>
+
+     
+      <div style="flex:1"></div>
+
+     
+      <div class="green-indicator" title="Unread">165</div>
+      <div style="height:6px"></div>
+      <div style="width:36px;height:36px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;border:1px solid rgba(0,0,0,0.06)" title="Profile">
+        <i class="fa-regular fa-circle-user" style="color:#25d366"></i>
+      </div>
+      <div style="height:12px"></div>
+    </nav>
+
+    
+    <aside class="chats-column" aria-label="Chats">
+      <div class="chats-header">
+        <h2>Chats</h2>
+        <div class="icons">
+          <i class="fa-regular fa-pen-to-square" title="New chat"></i>
+          <i class="fa-solid fa-ellipsis-vertical" title="Menu"></i>
+        </div>
+      </div>
+
+      <div class="search-wrap">
+        <div class="search" role="search" aria-label="Search chats">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" placeholder="Search or start a new chat" aria-label="Search or start a new chat">
+        </div>
+      </div>
+
+      <div class="chat-list" role="list" aria-label="chat list">
+
+    
+        <div class="chat-item" role="listitem" aria-label="Ibrahim">
+          <div class="avatar" aria-hidden="true">I</div>
+          <div class="chat-meta">
+            <div class="meta-left">
+              <div class="meta-top">
+                <div class="name"><a href="WAATTT.html">Ibrahim</a></div>
+                <div class="time">Yesterday</div>
+              </div>
+              <div class="preview"> How you dey when you dey come ehnn youno no </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;flex-direction:column;gap:8px;justify-content:flex-start">
+            
+            </div>
+          </div>
+        </div>
+
+       
+        <div class="chat-item" role="listitem" aria-label="Hostel Hunt">
+          <div class="avatar" aria-hidden="true">H</div>
+          <div class="chat-meta">
+            <div class="meta-left">
+              <div class="meta-top">
+                <div class="name">Hostel Hunt (osogbo) 3 </div>
+                <div class="time">Yesterday</div>
+              </div>
+              <div class="preview">~Bryan:  A room Selfcon with wardrobe...</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div c></div>
+            </div>
+          </div>
+        </div>
+
+       
+        <div class="chat-item" role="listitem" aria-label="Mummy">
+          <div class="avatar" aria-hidden="true">M</div>
+          <div class="chat-meta">
+            <div class="meta-left">
+              <div class="meta-top">
+                <div class="name"><a href="mummy.html">Mummy</a></div>
+                <div class="time">10/10/2025</div>
+              </div>
+              <div class="preview">Today, the great doors of your progress, test...</div>
+            </div>
+            <div></div>
+          </div>
+        </div>
+
+        
+        <div class="chat-item" role="listitem" aria-label="BDP BACKUP">
+          <div class="avatar" aria-hidden="true">B</div>
+          <div class="chat-meta">
+            <div class="meta-left">
+              <div class="meta-top">
+                <div class="name"> BDP BACKUP</div>
+                <div class="time">10/10/2025</div>
+              </div>
+              <div class="preview">+233 59 832 4831 - All what you need to gen...</div>
+            </div>
+            <div></div>
+          </div>
+        </div>
+
+        
+        <div class="chat-item" role="listitem" aria-label="Mummy">
+          <div class="avatar" aria-hidden="true">M</div>
+          <div class="chat-meta">
+            <div class="meta-left">
+              <div class="meta-top">
+                <div class="name">daddy</div>
+                <div class="time">10/10/2025</div>
+              </div>
+              <div class="preview"> when are you coming home? sho ti jeun </div>
+            </div>
+            <div></div>
+          </div>
+
+        </div> 
+       
+        <div class="chat-item" role="listitem" aria-label="Mummy">
+          <div class="avatar" aria-hidden="true">M</div>
+          <div class="chat-meta">
+            <div class="meta-left">
+              <div class="meta-top">
+                <div class="name">Mum</div>
+                <div class="time">10/10/2025</div>
+              </div>
+              <div class="preview"> baba re nko nibo lowa baba re nko nibo lowa .....</div>
+            </div>
+            <div></div>
+          </div>
+        </div>
+
+ 
+        <div class="chat-item" role="listitem" aria-label="Mummy">
+          <div class="avatar" aria-hidden="true">M</div>
+          <div class="chat-meta">
+            <div class="meta-left">
+              <div class="meta-top">
+                <div class="name">ahmad</div>
+                <div class="time">10/10/2025</div>
+              </div>
+              <div class="preview"> the great doors of your progress test.</div>
+            </div>
+            <div></div>
+          </div>
+        </div>
+
+
+       
+        <div style="height:24px"></div>
+      </div>
+    </aside>
+
+    
+    <main class="viewer" role="main" aria-label="Main viewer">
+      <div class="viewer-card" aria-hidden="false">
+        <div class="bubble"><i class="fa-brands fa-whatsapp" style="color:#7c858b;font-size:32px"></i></div>
+        <h3>WhatsApp for Windows</h3>
+        <p>
+          This app does not currently have WhatsApp Business features (like catalogs, labels and messaging tools).
+          These features are available on <a href="https://web.whatsapp.com" target="_blank" rel="noreferrer">web.whatsapp.com</a>.
+        </p>
+      </div>
+
+      <div class="footer">End-to-end encrypted</div>
+    </main>
+  </div>
+</body>
+</html>

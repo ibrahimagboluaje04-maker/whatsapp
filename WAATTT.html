@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>WhatsApp Chat Clone</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #eae6df;
+    --chat-bg: #efeae2;
+    --msg-green: #d9fdd3;
+    --msg-gray: #ffffff;
+    --text: #111b21;
+    --muted: #667781;
+    --accent: #25d366;
+  }
+
+  * {box-sizing:border-box;}
+  html,body {
+    height:100%;
+    margin:0;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+  }
+
+  .window {
+    display:flex;
+    flex-direction:column;
+    height:100vh;
+    width:100vw;
+  }
+
+  /* Header */
+  .header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 16px;
+    background:#f0f2f5;
+    border-bottom:1px solid #d1d7db;
+  }
+
+  .header-left {
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .avatar {
+    width:36px; height:36px; border-radius:50%;
+    background:#ccc url('https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png') center/cover;
+  }
+  .contact-info {
+    display:flex;
+    flex-direction:column;
+  }
+  .contact-name {
+    font-weight:600;
+    font-size:15px;
+    color:var(--text);
+  }
+  .contact-status {
+    font-size:13px;
+    color:var(--muted);
+  }
+  .header-icons {
+    display:flex;
+    gap:18px;
+    color:var(--muted);
+    font-size:18px;
+  }
+
+  /* Chat area */
+  .chat-area {
+    flex:1;
+    background-color: #d1d7db;
+    background-size:contain;
+    padding:24px;
+    overflow-y:auto;
+  }
+
+  .message {
+    max-width:70%;
+    padding:8px 10px;
+    border-radius:8px;
+    margin-bottom:10px;
+    font-size:14px;
+    line-height:1.4;
+    position:relative;
+    word-wrap:break-word;
+  }
+  .message.sent {
+    background:var(--msg-green);
+    margin-left:auto;
+    width: fit-content;
+
+  }
+  .message.received {
+    background:var(--msg-gray);
+    margin-right:auto;
+    width: fit-content;
+
+  }
+  .message .time {
+    font-size:8px;
+    color:var(--muted);
+    margin-left:10px;
+  }
+  .message.sent .time {
+    float:right;
+  }
+
+  /* Input bar */
+  .input-bar {
+    display:flex;
+    align-items:center;
+    padding:8px 12px;
+    background:#f0f2f5;
+    border-top:1px solid #d1d7db;
+    gap:10px;
+  }
+  .input-bar i {
+    color:var(--muted);
+    font-size:20px;
+  }
+  .input-bar input {
+    flex:1;
+    border:none;
+    background:#fff;
+    border-radius:20px;
+    padding:10px 14px;
+    font-size:14px;
+    outline:none;
+  }
+</style>
+</head>
+
+<body>
+  <div class="window">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <div class="avatar"></div>
+        <div class="contact-info">
+          <div class="contact-name">Ibrahim</div>
+          <div class="contact-status">online</div>
+        </div>
+      </div>
+      <div class="header-icons">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-paperclip"></i>
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      </div>
+    </div>
+
+    <!-- Chat area -->
+    <div class="chat-area">
+      <div class="message received">
+         How are you doing? how much 
+        <span class="time">22:16</span>
+      </div>
+
+      <div class="message sent">
+        Nah 15bay  you do oo i will drop your calling number for ham <br>
+        <br>
+        
+        <span class="time">22:16 <i class="fa-solid fa-check-double" style="color:#53bdeb;"></i></span>
+      </div>
+
+      <div class="message received">
+        Croatia don spoil am
+        <span class="time">22:16</span>
+      </div>
+
+      <div class="message sent">
+        Croatia life don spoil they don lose game <br>
+        Jesus 😂😂
+        <span class="time">22:17 <i class="fa-solid fa-check-double" style="color:#53bdeb;"></i></span>
+      </div>
+
+      <div class="message received">
+        They even score one goal guy
+
+       
+        <span class="time">22:27</span>
+      </div>
+
+      <div class="message sent">
+         how you dey when you dey come ehnnnnnnn
+        <span class="time">22:31 <i class="fa-solid fa-check-double" style="color:#53bdeb;"></i></span>
+      </div>
+    </div>
+
+    <!-- Input bar -->
+    <div class="input-bar">
+      <i class="fa-regular fa-face-smile"></i>
+      <input type="text" placeholder="Type a message" />
+      <i class="fa-solid fa-microphone"></i>
+    </div>
+  </div>
+</body>
+</html>
